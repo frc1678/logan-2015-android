@@ -9,7 +9,6 @@ public class ReconAcquisition extends RealmObject {
     private int uniqueID;
     private int numReconsAcquired;
     private boolean acquiredMiddle;
-    private float time;
 
     public int getUniqueID() {
         return uniqueID;
@@ -33,13 +32,5 @@ public class ReconAcquisition extends RealmObject {
 
     public void setAcquiredMiddle(boolean acquiredMiddle) {
         this.acquiredMiddle = acquiredMiddle;
-    }
-
-    public float getTime() {
-        return time;
-    }
-
-    public void setTime(float time) {
-        this.time = time;
     }
 }

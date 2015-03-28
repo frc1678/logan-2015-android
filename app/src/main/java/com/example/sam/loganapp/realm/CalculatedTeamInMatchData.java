@@ -9,13 +9,13 @@ import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class CalculatedTeamInMatchData extends RealmObject {
-    private int cachedData;
+    private int numReconsPickedUp;
 
-    public int getCachedData() {
-        return cachedData;
+    public int getNumReconsPickedUp() {
+        return numReconsPickedUp;
     }
 
-    public void setCachedData(int cachedData) {
-        this.cachedData = cachedData;
+    public void setNumReconsPickedUp(int numReconsPickedUp) {
+        this.numReconsPickedUp = numReconsPickedUp;
     }
 }

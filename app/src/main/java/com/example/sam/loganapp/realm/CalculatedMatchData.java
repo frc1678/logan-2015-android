@@ -14,32 +14,35 @@ public class CalculatedMatchData extends RealmObject {
     private String bestRedAutoStrategy;
     private String bestBlueAutoStrategy;
 
-
-    public int getPredictedBlueScore() {
-        return predictedBlueScore;
-     }
-     
-    public void setPredictedBlueScore(int predictedBlueScore) {
-        this.predictedBlueScore = predictedBlueScore;
-    }
-     
     public int getPredictedRedScore() {
         return predictedRedScore;
-     }
-     
+    }
+
     public void setPredictedRedScore(int predictedRedScore) {
         this.predictedRedScore = predictedRedScore;
     }
-    public void setBestRedAutoStrategy(String bestRedAutoStrategy){
-        this.bestRedAutoStrategy = bestRedAutoStrategy;
+
+    public int getPredictedBlueScore() {
+        return predictedBlueScore;
     }
-    public String getBestRedAutoStrategy(){
+
+    public void setPredictedBlueScore(int predictedBlueScore) {
+        this.predictedBlueScore = predictedBlueScore;
+    }
+
+    public String getBestRedAutoStrategy() {
         return bestRedAutoStrategy;
     }
-    public void setBestBlueAutoStrategy(String bestBlueAutoStrategy){
-        this.bestBlueAutoStrategy = bestBlueAutoStrategy;
+
+    public void setBestRedAutoStrategy(String bestRedAutoStrategy) {
+        this.bestRedAutoStrategy = bestRedAutoStrategy;
     }
-    public String getBestBlueAutoStrategy(){
+
+    public String getBestBlueAutoStrategy() {
         return bestBlueAutoStrategy;
+    }
+
+    public void setBestBlueAutoStrategy(String bestBlueAutoStrategy) {
+        this.bestBlueAutoStrategy = bestBlueAutoStrategy;
     }
 }

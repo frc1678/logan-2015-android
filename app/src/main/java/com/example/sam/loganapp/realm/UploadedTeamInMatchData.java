@@ -10,42 +10,33 @@ import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class UploadedTeamInMatchData extends RealmObject {
-    private boolean robotMovedIntoAutoZone;
     private boolean stackedToteSet;
-    private int numTotesMovedIntoAutoZone;
     private int numContainersMovedIntoAutoZone;
 
     private int numTotesStacked;
     private int numReconLevels;
     private int numNoodlesContributed;
     private int numReconsStacked;
-    private int numReconsPickedUp;
+    private int numHorizontalReconsPickedUp;
+    private int numVerticalReconsPickedUp;
     private int numTotesPickedUpFromGround;
     private int numLitterDropped;
     private int numStacksDamaged;
     private RealmList<CoopAction> coopActions;
     private int maxFieldToteHeight;
     private int maxReconHeight;
+    private int numTeleopReconsFromStep;
 
     private RealmList<ReconAcquisition> reconAcquisitions;
 
-    private int numReconsKnockedOver;
     private int agility;
-    private int stackPlacing;
+    private int stackPlacing; // From the time they create a stack, how secure does it look
     private int humanPlayerLoading;
     private boolean incapacitated;
     private boolean disabled;
     private String miscellaneousNotes;
     private int numStepReconAcquisitionsFailed;
-    private int numStacksCapped;
-
-    public boolean isRobotMovedIntoAutoZone() {
-        return robotMovedIntoAutoZone;
-    }
-
-    public void setRobotMovedIntoAutoZone(boolean robotMovedIntoAutoZone) {
-        this.robotMovedIntoAutoZone = robotMovedIntoAutoZone;
-    }
+    private int numSixStacksCapped;
 
     public boolean isStackedToteSet() {
         return stackedToteSet;
@@ -53,14 +44,6 @@ public class UploadedTeamInMatchData extends RealmObject {
 
     public void setStackedToteSet(boolean stackedToteSet) {
         this.stackedToteSet = stackedToteSet;
-    }
-
-    public int getNumTotesMovedIntoAutoZone() {
-        return numTotesMovedIntoAutoZone;
-    }
-
-    public void setNumTotesMovedIntoAutoZone(int numTotesMovedIntoAutoZone) {
-        this.numTotesMovedIntoAutoZone = numTotesMovedIntoAutoZone;
     }
 
     public int getNumContainersMovedIntoAutoZone() {
@@ -103,12 +86,20 @@ public class UploadedTeamInMatchData extends RealmObject {
         this.numReconsStacked = numReconsStacked;
     }
 
-    public int getNumReconsPickedUp() {
-        return numReconsPickedUp;
+    public int getNumHorizontalReconsPickedUp() {
+        return numHorizontalReconsPickedUp;
     }
 
-    public void setNumReconsPickedUp(int numReconsPickedUp) {
-        this.numReconsPickedUp = numReconsPickedUp;
+    public void setNumHorizontalReconsPickedUp(int numHorizontalReconsPickedUp) {
+        this.numHorizontalReconsPickedUp = numHorizontalReconsPickedUp;
+    }
+
+    public int getNumVerticalReconsPickedUp() {
+        return numVerticalReconsPickedUp;
+    }
+
+    public void setNumVerticalReconsPickedUp(int numVerticalReconsPickedUp) {
+        this.numVerticalReconsPickedUp = numVerticalReconsPickedUp;
     }
 
     public int getNumTotesPickedUpFromGround() {
@@ -159,20 +150,20 @@ public class UploadedTeamInMatchData extends RealmObject {
         this.maxReconHeight = maxReconHeight;
     }
 
+    public int getNumTeleopReconsFromStep() {
+        return numTeleopReconsFromStep;
+    }
+
+    public void setNumTeleopReconsFromStep(int numTeleopReconsFromStep) {
+        this.numTeleopReconsFromStep = numTeleopReconsFromStep;
+    }
+
     public RealmList<ReconAcquisition> getReconAcquisitions() {
         return reconAcquisitions;
     }
 
     public void setReconAcquisitions(RealmList<ReconAcquisition> reconAcquisitions) {
         this.reconAcquisitions = reconAcquisitions;
-    }
-
-    public int getNumReconsKnockedOver() {
-        return numReconsKnockedOver;
-    }
-
-    public void setNumReconsKnockedOver(int numReconsKnockedOver) {
-        this.numReconsKnockedOver = numReconsKnockedOver;
     }
 
     public int getAgility() {
@@ -231,11 +222,11 @@ public class UploadedTeamInMatchData extends RealmObject {
         this.numStepReconAcquisitionsFailed = numStepReconAcquisitionsFailed;
     }
 
-    public int getNumStacksCapped() {
-        return numStacksCapped;
+    public int getNumSixStacksCapped() {
+        return numSixStacksCapped;
     }
 
-    public void setNumStacksCapped(int numStacksCapped) {
-        this.numStacksCapped = numStacksCapped;
+    public void setNumSixStacksCapped(int numSixStacksCapped) {
+        this.numSixStacksCapped = numSixStacksCapped;
     }
 }

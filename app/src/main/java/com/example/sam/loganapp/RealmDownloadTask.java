@@ -25,7 +25,7 @@ import io.realm.processor.Utils;
 
 
 public class RealmDownloadTask extends AsyncTask {
-    MainActivity mainActivity;
+    TeamListActivity teamListActivity;
     private static int activeThreadCount = 0;
     DbxFile realmFile;
     FileInputStream fis;
@@ -40,8 +40,10 @@ public class RealmDownloadTask extends AsyncTask {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
+
         DbxFileSystem dbxFs = (DbxFileSystem) params[0];
-        mainActivity = (MainActivity) params[1];
+        teamListActivity = (TeamListActivity) params[1];
+
         try {
             dbxFs.setMaxFileCacheSize(0);
             dbxFs.setMaxFileCacheSize(Constants.DEFAULT_CACHE_SIZE);
@@ -68,21 +70,21 @@ public class RealmDownloadTask extends AsyncTask {
         activeThreadCount--;
         InputStream realmStream = (InputStream) o;
         try {
-            if (mainActivity.realm != null) {
-                mainActivity.realm.close();
+            if (teamListActivity.realm != null) {
+                teamListActivity.realm.close();
             }
-            Realm.deleteRealmFile(mainActivity, "realm.realm");
-            OutputStream outputStream = mainActivity.openFileOutput("realm.realm", Context.MODE_PRIVATE);
+            Realm.deleteRealmFile(teamListActivity, "realm.realm");
+            OutputStream outputStream = teamListActivity.openFileOutput("realm.realm", Context.MODE_PRIVATE);
             int b = 0;
             Log.e("test", "Time to start reading and writing!");
             while ((b = realmStream.read()) != -1) {
 // Log.e("test", "read! " + b);
                 outputStream.write(b);
             }
-            for (String file : mainActivity.fileList()) {
+            for (String file : teamListActivity.fileList()) {
                 Log.e("test", "The file is " + file);
             }
-            Log.e("test", "File size is " + mainActivity.openFileInput("realm.realm").available());
+            Log.e("test", "File size is " + teamListActivity.openFileInput("realm.realm").available());
             outputStream.close();
         } catch (IOException ioe) {
             Log.e("Test", "ERROR " + ioe.getMessage());
@@ -95,30 +97,15 @@ public class RealmDownloadTask extends AsyncTask {
         } catch (IOException ioe) {
             realmFile.close();
         } catch (NullPointerException npe) {
-//Do nothing
+
         }
-        Log.e("test", "Setting new Realm");
-        Team team = null;
         try {
-            mainActivity.realm = Realm.getInstance(mainActivity.getApplicationContext(), "realm.realm");
-            RealmQuery<Team> teamRealmQuery = mainActivity.realm.where(Team.class);
-            teamRealmQuery.equalTo("number", Constants.currentTeamNumber);
-            team = teamRealmQuery.findFirst();
-            mainActivity.realm.refresh();
+            teamListActivity.realm = Realm.getInstance(teamListActivity.getApplicationContext(), "realm.realm");
+            teamListActivity.realm.refresh();
+            teamListActivity.resetListView();
         } catch (Exception e) {
-            mainActivity.realm = null;
+            teamListActivity.realm = null;
         }
-        if (team != null) {
-            mainActivity.team = team;
-        } else {
-            mainActivity.getFirstTeam();
-        }
-        Log.e("test", "Current team number is " + Constants.currentTeamNumber);
-//        if (Constants.currentTeamNumber == -1) {
-//            mainActivity.updateTeam(false);
-//        } else {
-//            mainActivity.updateTeam(true);
-//        }
     }
 
     @Override

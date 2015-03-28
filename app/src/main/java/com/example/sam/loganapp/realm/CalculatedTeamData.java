@@ -16,8 +16,8 @@ public class CalculatedTeamData extends RealmObject {
     private float predictedAverageScore;
     private float firstPickAbility;
     private float secondPickAbility;
-    private float landfillThirdPickAbility;
-    private float hpThirdPickability;
+    private float thirdPickAbilityLandfill;
+    private float thirdPickAbility;
     private float stackingAbility;
     private float noodleReliability;
     private float avgNumMaxHeightStacks;
@@ -25,19 +25,16 @@ public class CalculatedTeamData extends RealmObject {
     private float reconReliability;
     private float isRobotMoveIntoAutoZonePercentage;
     private float isStackedToteSetPercentage;
-    private float avgNumTotesMoveIntoAutoZone;
     private float avgNumReconsMovedIntoAutoZone;
     private float avgNumTotesStacked;
     private float avgNumReconLevels;
     private float avgNumNoodlesContributed;
     private float avgNumReconsStacked;
-    private float avgNumReconsPickedUp;
     private float avgNumTotesPickedUpFromGround;
     private float avgNumLitterDropped;
     private float avgNumStacksDamaged;
     private float avgMaxFieldToteHeight;
     private float avgMaxReconHeight;
-    private float avgNumLitterThrownToOtherSide;
     private float avgAgility;
     private float driverAbility;
     private float avgStackPlacing;
@@ -45,18 +42,80 @@ public class CalculatedTeamData extends RealmObject {
     private float incapacitatedPercentage;
     private float disabledPercentage;
     private float reliability;
-    private float avgReconStepAcquisitionTime;
     private String reconAcquisitionTypes;
     private String mostCommonReconAcquisitionType;
-    private float avgMostCommonReconAcquisitionTypeTime;
-    private float avgCounterChokeholdTime;
-    private float avgThreeChokeholdTime;
-    private float avgFourChokeholdTime;
     private float avgCoopPoints;
-    private float avgNumReconsKnockedOver;
     private float stepReconSuccessRateInAuto;
     private float avgStepReconsAcquiredInAuto;
     private float bottomPlacingSuccessRate;
+    private float avgNumHorizontalReconsPickedUp;
+    private float avgNumVerticalReconsPickedUp;
+    private float avgNumReconsPickedUp;
+
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public float getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(float averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public float getPredictedTotalScore() {
+        return predictedTotalScore;
+    }
+
+    public void setPredictedTotalScore(float predictedTotalScore) {
+        this.predictedTotalScore = predictedTotalScore;
+    }
+
+    public float getPredictedAverageScore() {
+        return predictedAverageScore;
+    }
+
+    public void setPredictedAverageScore(float predictedAverageScore) {
+        this.predictedAverageScore = predictedAverageScore;
+    }
+
+    public float getFirstPickAbility() {
+        return firstPickAbility;
+    }
+
+    public void setFirstPickAbility(float firstPickAbility) {
+        this.firstPickAbility = firstPickAbility;
+    }
+
+    public float getSecondPickAbility() {
+        return secondPickAbility;
+    }
+
+    public void setSecondPickAbility(float secondPickAbility) {
+        this.secondPickAbility = secondPickAbility;
+    }
+
+    public float getThirdPickAbilityLandfill() {
+        return thirdPickAbilityLandfill;
+    }
+
+    public void setThirdPickAbilityLandfill(float thirdPickAbilityLandfill) {
+        this.thirdPickAbilityLandfill = thirdPickAbilityLandfill;
+    }
+
+    public float getThirdPickAbility() {
+        return thirdPickAbility;
+    }
+
+    public void setThirdPickAbility(float thirdPickAbility) {
+        this.thirdPickAbility = thirdPickAbility;
+    }
 
     public float getStackingAbility() {
         return stackingAbility;
@@ -114,14 +173,6 @@ public class CalculatedTeamData extends RealmObject {
         this.isStackedToteSetPercentage = isStackedToteSetPercentage;
     }
 
-    public float getAvgNumTotesMoveIntoAutoZone() {
-        return avgNumTotesMoveIntoAutoZone;
-    }
-
-    public void setAvgNumTotesMoveIntoAutoZone(float avgNumTotesMoveIntoAutoZone) {
-        this.avgNumTotesMoveIntoAutoZone = avgNumTotesMoveIntoAutoZone;
-    }
-
     public float getAvgNumReconsMovedIntoAutoZone() {
         return avgNumReconsMovedIntoAutoZone;
     }
@@ -162,14 +213,6 @@ public class CalculatedTeamData extends RealmObject {
         this.avgNumReconsStacked = avgNumReconsStacked;
     }
 
-    public float getAvgNumReconsPickedUp() {
-        return avgNumReconsPickedUp;
-    }
-
-    public void setAvgNumReconsPickedUp(float avgNumReconsPickedUp) {
-        this.avgNumReconsPickedUp = avgNumReconsPickedUp;
-    }
-
     public float getAvgNumTotesPickedUpFromGround() {
         return avgNumTotesPickedUpFromGround;
     }
@@ -208,14 +251,6 @@ public class CalculatedTeamData extends RealmObject {
 
     public void setAvgMaxReconHeight(float avgMaxReconHeight) {
         this.avgMaxReconHeight = avgMaxReconHeight;
-    }
-
-    public float getAvgNumLitterThrownToOtherSide() {
-        return avgNumLitterThrownToOtherSide;
-    }
-
-    public void setAvgNumLitterThrownToOtherSide(float avgNumLitterThrownToOtherSide) {
-        this.avgNumLitterThrownToOtherSide = avgNumLitterThrownToOtherSide;
     }
 
     public float getAvgAgility() {
@@ -274,14 +309,6 @@ public class CalculatedTeamData extends RealmObject {
         this.reliability = reliability;
     }
 
-    public float getAvgReconStepAcquisitionTime() {
-        return avgReconStepAcquisitionTime;
-    }
-
-    public void setAvgReconStepAcquisitionTime(float avgReconStepAcquisitionTime) {
-        this.avgReconStepAcquisitionTime = avgReconStepAcquisitionTime;
-    }
-
     public String getReconAcquisitionTypes() {
         return reconAcquisitionTypes;
     }
@@ -298,108 +325,12 @@ public class CalculatedTeamData extends RealmObject {
         this.mostCommonReconAcquisitionType = mostCommonReconAcquisitionType;
     }
 
-    public float getAvgMostCommonReconAcquisitionTypeTime() {
-        return avgMostCommonReconAcquisitionTypeTime;
-    }
-
-    public void setAvgMostCommonReconAcquisitionTypeTime(float avgMostCommonReconAcquisitionTypeTime) {
-        this.avgMostCommonReconAcquisitionTypeTime = avgMostCommonReconAcquisitionTypeTime;
-    }
-
-    public float getAvgCounterChokeholdTime() {
-        return avgCounterChokeholdTime;
-    }
-
-    public void setAvgCounterChokeholdTime(float avgCounterChokeholdTime) {
-        this.avgCounterChokeholdTime = avgCounterChokeholdTime;
-    }
-
-    public float getAvgThreeChokeholdTime() {
-        return avgThreeChokeholdTime;
-    }
-
-    public void setAvgThreeChokeholdTime(float avgThreeChokeholdTime) {
-        this.avgThreeChokeholdTime = avgThreeChokeholdTime;
-    }
-
-    public float getAvgFourChokeholdTime() {
-        return avgFourChokeholdTime;
-    }
-
-    public void setAvgFourChokeholdTime(float avgFourChokeholdTime) {
-        this.avgFourChokeholdTime = avgFourChokeholdTime;
-    }
-
     public float getAvgCoopPoints() {
         return avgCoopPoints;
     }
 
     public void setAvgCoopPoints(float avgCoopPoints) {
         this.avgCoopPoints = avgCoopPoints;
-    }
-
-    public int getPredictedSeed() {
-        return predictedSeed;
-    }
-
-    public void setPredictedSeed(int predictedSeed) {
-        this.predictedSeed = predictedSeed;
-    }
-
-    public float getFirstPickAbility() {
-        return firstPickAbility;
-    }
-
-    public void setFirstPickAbility(float firstPickAbility) {
-        this.firstPickAbility = firstPickAbility;
-    }
-
-    public float getSecondPickAbility() {
-        return secondPickAbility;
-    }
-
-    public void setSecondPickAbility(float secondPickAbility) {
-        this.secondPickAbility = secondPickAbility;
-    }
-
-    public float getLandfillThirdPickAbility() {
-        return landfillThirdPickAbility;
-    }
-
-    public void setLandfillThirdPickAbility(float landfillThirdPickAbility) {
-        this.landfillThirdPickAbility = landfillThirdPickAbility;
-    }
-
-    public float getHpThirdPickability() {
-        return hpThirdPickability;
-    }
-
-    public void setHpThirdPickability(float hpThirdPickability) {
-        this.hpThirdPickability = hpThirdPickability;
-    }
-
-    public int getTotalScore() {
-        return totalScore;
-    }
-
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
-    }
-
-    public float getPredictedTotalScore() {
-        return predictedTotalScore;
-    }
-
-    public void setPredictedTotalScore(float predictedTotalScore) {
-        this.predictedTotalScore = predictedTotalScore;
-    }
-
-    public float getAvgNumReconsKnockedOver() {
-        return avgNumReconsKnockedOver;
-    }
-
-    public void setAvgNumReconsKnockedOver(float avgNumReconsKnockedOver) {
-        this.avgNumReconsKnockedOver = avgNumReconsKnockedOver;
     }
 
     public float getStepReconSuccessRateInAuto() {
@@ -426,20 +357,36 @@ public class CalculatedTeamData extends RealmObject {
         this.bottomPlacingSuccessRate = bottomPlacingSuccessRate;
     }
 
-    public float getAverageScore() {
-        return averageScore;
+    public int getPredictedSeed() {
+        return predictedSeed;
     }
 
-    public void setAverageScore(float averageScore) {
-        this.averageScore = averageScore;
+    public void setPredictedSeed(int predictedSeed) {
+        this.predictedSeed = predictedSeed;
     }
 
-    public float getPredictedAverageScore() {
-        return predictedAverageScore;
+    public float getAvgNumHorizontalReconsPickedUp() {
+        return avgNumHorizontalReconsPickedUp;
     }
 
-    public void setPredictedAverageScore(float predictedAverageScore) {
-        this.predictedAverageScore = predictedAverageScore;
+    public void setAvgNumHorizontalReconsPickedUp(float avgNumHorizontalReconsPickedUp) {
+        this.avgNumHorizontalReconsPickedUp = avgNumHorizontalReconsPickedUp;
+    }
+
+    public float getAvgNumVerticalReconsPickedUp() {
+        return avgNumVerticalReconsPickedUp;
+    }
+
+    public void setAvgNumVerticalReconsPickedUp(float avgNumVerticalReconsPickedUp) {
+        this.avgNumVerticalReconsPickedUp = avgNumVerticalReconsPickedUp;
+    }
+
+    public float getAvgNumReconsPickedUp() {
+        return avgNumReconsPickedUp;
+    }
+
+    public void setAvgNumReconsPickedUp(float avgNumReconsPickedUp) {
+        this.avgNumReconsPickedUp = avgNumReconsPickedUp;
     }
 }
 
