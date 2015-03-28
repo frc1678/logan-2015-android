@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
+    // Comments
     public void submitClicked(View view){
       TextView willingnessValue = (TextView)findViewById(R.id.willingTV);
       ToggleButton mountabilityValue = (ToggleButton)findViewById(R.id.toggleButton);
