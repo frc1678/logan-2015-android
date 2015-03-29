@@ -142,7 +142,15 @@ public class Utils {
             teamsResults.sort("number");
             Log.e("Test", "Finished sorting by number");
 
-            ArrayList<Team> sortedTeamsArrayList = new ArrayList<Team>(Arrays.asList((Team[])teamsResults.toArray()));
+            Log.e("Test", teamsResults.toString());
+
+            ArrayList<Team> sortedTeamsArrayList = new ArrayList<Team>();
+
+            for ( int i=0; i<teamsResults.toArray().length; i++) {
+                sortedTeamsArrayList.add((Team)teamsResults.toArray()[i]);
+            }
+
+            Log.e("Test", sortedTeamsArrayList.toString());
 
             Comparator isSetComparator = new Comparator() {
                 @Override
@@ -155,8 +163,14 @@ public class Utils {
             };
             Collections.sort(sortedTeamsArrayList, isSetComparator);
             Log.e("test", "Finished sorting by comparator");
+            Log.e("Test", sortedTeamsArrayList.toString());
 
-            Team[] sortedTeams = (Team[])sortedTeamsArrayList.toArray();
+            Team[] sortedTeams = new Team[sortedTeamsArrayList.toArray().length];
+            for ( int i = 0; i<sortedTeamsArrayList.toArray().length; i++ ) {
+                sortedTeams[i] = sortedTeamsArrayList.get(i);
+            }
+
+            Log.e("test", "Final sorted teams: " + sortedTeams.toString());
             return sortedTeams;
         } else {
             return new Team[0];

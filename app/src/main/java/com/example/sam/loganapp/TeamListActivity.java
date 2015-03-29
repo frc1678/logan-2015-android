@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,12 +25,14 @@ import com.dropbox.sync.android.DbxAccountManager;
 import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxFileSystem;
 import com.example.sam.loganapp.realm.Team;
+import com.example.sam.loganapp.realm.UploadedTeamData;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 
 
 public class TeamListActivity extends ListActivity {
@@ -90,86 +91,8 @@ public class TeamListActivity extends ListActivity {
     }
 
     public void resetListAdapter() {
-        setListAdapter(new BaseAdapter() {
-
-            @Override
-            public boolean areAllItemsEnabled() {
-                return true;
-            }
-
-            @Override
-            public boolean isEnabled(int i) {
-                return true;
-            }
-
-            @Override
-            public void registerDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public int getCount() {
-                return teamsSearched.size();
-            }
-
-            @Override
-            public Object getItem(int i) {
-                Team team = teamsSearched.get(i);
-                return team;
-            }
-
-            @Override
-            public long getItemId(int i) {
-                return 0;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return false;
-            }
-
-            @Override
-            public View getView(int i, View view, ViewGroup viewGroup) {
-                View rowView = view;
-
-                if (rowView == null) {
-                    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    rowView = inflater.inflate(R.layout.team_list_cell, viewGroup, false);
-                }
-
-                TextView teamText = (TextView) rowView.findViewById(R.id.teamText);
-                Team team = (Team)getItem(i);
-                teamText.setText(team.getNumber());
-
-                if (team.getUploadedData().getMountingWillingness() != -1) {
-                    teamText.setTextColor(Color.BLACK);
-                } else {
-                    teamText.setTextColor(Color.RED);
-                }
-
-                return rowView;
-            }
-
-            @Override
-            public int getItemViewType(int i) {
-                return 0;
-            }
-
-            @Override
-            public int getViewTypeCount() {
-                return 1;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-        });
+        ListView lv = (ListView)findViewById(android.R.id.list);
+        lv.setAdapter(new TeamListAdapter(teamsSearched, this));
     }
 
     public void searchWithText(String searchString) {
@@ -236,17 +159,6 @@ public class TeamListActivity extends ListActivity {
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        TextView teamNumberView = (TextView) v.findViewById(R.id.teamText);
-        String teamNumberText = teamNumberView.getText().toString();
-        Integer selectedTeamNumber = Integer.parseInt(teamNumberText);
-        Intent finishIntent = new Intent();
-        finishIntent.putExtra("selectedTeam", selectedTeamNumber);
-        setResult(Activity.RESULT_OK, finishIntent);
-        finish();
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_LINK_TO_DBX) {
             if (resultCode == Activity.RESULT_OK) {
@@ -256,12 +168,23 @@ public class TeamListActivity extends ListActivity {
                 DAM.startLink(this, Constants.REQUEST_LINK_TO_DBX);
             }
         } else if (requestCode == Constants.REQUEST_TEAM_ACTIVITY) {
+            Log.e("test", "Finished TeamActivity");
             if (resultCode == Activity.RESULT_OK) {
-                float willingness = data.getFloatExtra("willingness", (float)0.0);
-                boolean canMount = data.getBooleanExtra("canMount", false);
+                float willingness = data.getFloatExtra("teamWillingness", (float)0.0);
+                boolean canMount = data.getBooleanExtra("teamCanMount", false);
+                int teamNum = Integer.parseInt(data.getStringExtra("teamNum"));
 
-                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), Constants.currentTeamNumber, Constants.WILLINGNESS_TO_MOUNT_TYPE, willingness);
-                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), Constants.currentTeamNumber, Constants.CAN_MOUNT_TYPE, canMount);
+                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.WILLINGNESS_TO_MOUNT_TYPE, willingness);
+                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.CAN_MOUNT_TYPE, canMount);
+
+                realm.beginTransaction();
+                Team team = realm.where(Team.class).equalTo("number", teamNum).findFirst();
+                UploadedTeamData utd = team.getUploadedData();
+                utd.setCanMountMechanism(canMount);
+                utd.setMountingWillingness(willingness);
+                team.setUploadedData(utd);
+
+                realm.commitTransaction();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
