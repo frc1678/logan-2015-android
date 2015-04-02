@@ -55,6 +55,7 @@ public class TeamListActivity extends ListActivity {
         } else {
             afterDbxLink();
         }
+        Log.e("dasf", teamsSearched.toString());
 
         setupList();
     }
@@ -170,10 +171,10 @@ public class TeamListActivity extends ListActivity {
         } else if (requestCode == Constants.REQUEST_TEAM_ACTIVITY) {
             Log.e("test", "Finished TeamActivity");
             if (resultCode == Activity.RESULT_OK) {
-                float willingness = data.getFloatExtra("teamWillingness", (float)0.0);
+                float willingness = data.getIntExtra("teamMountingSpeed", (int)0.0);
                 boolean canMount = data.getBooleanExtra("teamCanMount", false);
                 int teamNum = Integer.parseInt(data.getStringExtra("teamNum"));
-
+                //TODO: Update some of the names to reflect the lack of willingness, and to show the existence of mountingSpeed
                 Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.WILLINGNESS_TO_MOUNT_TYPE, willingness);
                 Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.CAN_MOUNT_TYPE, canMount);
 
@@ -181,7 +182,6 @@ public class TeamListActivity extends ListActivity {
                 Team team = realm.where(Team.class).equalTo("number", teamNum).findFirst();
                 UploadedTeamData utd = team.getUploadedData();
                 utd.setCanMountMechanism(canMount);
-                utd.setMountingWillingness(willingness);
                 team.setUploadedData(utd);
 
                 realm.commitTransaction();

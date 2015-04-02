@@ -81,7 +81,7 @@ public class TeamActivity extends Activity {
         TextView teamNumberTextView = (TextView)findViewById(R.id.teamNumber);
 
         Intent finishIntent = new Intent();
-        finishIntent.putExtra("teamWillingness", Float.parseFloat(willingnessValueTextView.getText().toString()));
+        finishIntent.putExtra("teamMountingSpeed",(int)(2 * Float.parseFloat(willingnessValueTextView.getText().toString())));
         finishIntent.putExtra("teamCanMount", mountabilityValueSwitch.isChecked());
         finishIntent.putExtra("teamNum", teamNumberTextView.getText());
         setResult(RESULT_OK, finishIntent);

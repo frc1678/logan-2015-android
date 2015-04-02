@@ -81,7 +81,8 @@ public class TeamListAdapter extends BaseAdapter {
         final Team team = (Team)getItem(i);
         teamText.setText(team.getNumber()+"");
 
-        if (team.getUploadedData().getMountingWillingness() != -1) {
+
+        if (team.getUploadedData().getMountingSpeed() != -1) {
             teamText.setTextColor(Color.BLACK);
         } else {
             teamText.setTextColor(Color.RED);
@@ -92,7 +93,6 @@ public class TeamListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, TeamActivity.class);
                 intent.putExtra("teamNum", team.getNumber());
-                intent.putExtra("teamWillingness", team.getUploadedData().getMountingWillingness());
                 intent.putExtra("teamCanMount", team.getUploadedData().isCanMountMechanism());
                 ((Activity)context).startActivityForResult(intent, Constants.REQUEST_TEAM_ACTIVITY);
             }

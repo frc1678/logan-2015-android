@@ -158,7 +158,7 @@ public class Utils {
                     Team teamOne = (Team)lhs;
                     Team teamTwo = (Team)rhs;
 
-                    return boolToInt(teamOne.getUploadedData().getMountingWillingness() != -1) - boolToInt(teamTwo.getUploadedData().getMountingWillingness() != -1);
+                    return boolToInt(teamOne.getUploadedData().getMountingSpeed() != -1) - boolToInt(teamTwo.getUploadedData().getMountingSpeed() != -1);
                 }
             };
             Collections.sort(sortedTeamsArrayList, isSetComparator);

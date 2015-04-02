@@ -1,5 +1,7 @@
 package com.example.sam.loganapp.realm;
 
+import java.lang.String;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.RealmClass;
@@ -26,6 +28,7 @@ public class UploadedTeamInMatchData extends RealmObject {
     private int maxFieldToteHeight;
     private int maxReconHeight;
     private int numTeleopReconsFromStep;
+    private int numTotesFromHP;
 
     private RealmList<ReconAcquisition> reconAcquisitions;
 
@@ -156,6 +159,14 @@ public class UploadedTeamInMatchData extends RealmObject {
 
     public void setNumTeleopReconsFromStep(int numTeleopReconsFromStep) {
         this.numTeleopReconsFromStep = numTeleopReconsFromStep;
+    }
+
+    public int getNumTotesFromHP() {
+        return numTotesFromHP;
+    }
+
+    public void setNumTotesFromHP(int numTotesFromHP) {
+        this.numTotesFromHP = numTotesFromHP;
     }
 
     public RealmList<ReconAcquisition> getReconAcquisitions() {

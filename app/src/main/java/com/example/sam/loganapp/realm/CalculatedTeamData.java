@@ -51,6 +51,7 @@ public class CalculatedTeamData extends RealmObject {
     private float avgNumHorizontalReconsPickedUp;
     private float avgNumVerticalReconsPickedUp;
     private float avgNumReconsPickedUp;
+    private int avgNumCappedSixStacks;
 
 
     public int getTotalScore() {
@@ -387,6 +388,14 @@ public class CalculatedTeamData extends RealmObject {
 
     public void setAvgNumReconsPickedUp(float avgNumReconsPickedUp) {
         this.avgNumReconsPickedUp = avgNumReconsPickedUp;
+    }
+
+    public int getAvgNumCappedSixStacks() {
+        return avgNumCappedSixStacks;
+    }
+
+    public void setAvgNumCappedSixStacks(int avgNumCappedSixStacks) {
+        this.avgNumCappedSixStacks = avgNumCappedSixStacks;
     }
 }
 
