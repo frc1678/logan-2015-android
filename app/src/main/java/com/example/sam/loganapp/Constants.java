@@ -6,7 +6,7 @@ package com.example.sam.loganapp;
 public class Constants {
     public static long DEFAULT_CACHE_SIZE = 0;
     public static int currentTeamNumber = -1;
-    public static final String DBX_REALM_DB_PATH = "/Database File/fully_updated_test.realm";
+    public static final String DBX_REALM_DB_PATH = "/Database File/SVR.realm";
     public static final String DBX_CHANGE_PACKETS_PATH = "/Change Packets/Unprocessed/";
     public static final String NUMBER_PROPERTY = "number";
     public static final String CAN_MOUNT_TYPE = "canMountMechanism";
