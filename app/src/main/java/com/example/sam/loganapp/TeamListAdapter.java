@@ -94,8 +94,6 @@ public class TeamListAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, TeamActivity.class);
                 intent.putExtra("teamNum", team.getNumber());
                 intent.putExtra("teamCanMount", team.getUploadedData().isCanMountMechanism());
-                intent.putExtra("teamMountSpeed", team.getUploadedData().getMountingSpeed());
-                intent.putExtra("teamRemoveMech", team.getUploadedData().isMechRemove());
                 ((Activity)context).startActivityForResult(intent, Constants.REQUEST_TEAM_ACTIVITY);
             }
         });

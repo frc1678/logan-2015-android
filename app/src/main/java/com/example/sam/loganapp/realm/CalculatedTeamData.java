@@ -51,9 +51,8 @@ public class CalculatedTeamData extends RealmObject {
     private float avgNumHorizontalReconsPickedUp;
     private float avgNumVerticalReconsPickedUp;
     private float avgNumReconsPickedUp;
-    private float avgNumCappedSixStacks;
-    private float avgNumTotesFromHP;
-    private float avgNumTeleopReconsFromStep;
+    private int avgNumCappedSixStacks;
+
 
     public int getTotalScore() {
         return totalScore;
@@ -387,32 +386,16 @@ public class CalculatedTeamData extends RealmObject {
         return avgNumReconsPickedUp;
     }
 
-    public void setAvgNumCappedSixStacks(float avgNumCappedSixStacks) {
-        this.avgNumCappedSixStacks = avgNumCappedSixStacks;
-    }
-
-    public float getAvgNumTotesFromHP() {
-        return avgNumTotesFromHP;
-    }
-
-    public void setAvgNumTotesFromHP(float avgNumTotesFromHP) {
-        this.avgNumTotesFromHP = avgNumTotesFromHP;
-    }
-
-    public float getAvgNumTeleopReconsFromStep() {
-        return avgNumTeleopReconsFromStep;
-    }
-
-    public void setAvgNumTeleopReconsFromStep(float avgNumTeleopReconsFromStep) {
-        this.avgNumTeleopReconsFromStep = avgNumTeleopReconsFromStep;
-    }
-
     public void setAvgNumReconsPickedUp(float avgNumReconsPickedUp) {
         this.avgNumReconsPickedUp = avgNumReconsPickedUp;
     }
 
-    public float getAvgNumCappedSixStacks() {
+    public int getAvgNumCappedSixStacks() {
         return avgNumCappedSixStacks;
+    }
+
+    public void setAvgNumCappedSixStacks(int avgNumCappedSixStacks) {
+        this.avgNumCappedSixStacks = avgNumCappedSixStacks;
     }
 }
 

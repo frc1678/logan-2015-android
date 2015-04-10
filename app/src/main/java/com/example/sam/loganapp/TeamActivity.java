@@ -5,14 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Rating;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,8 +27,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -40,11 +35,8 @@ import com.example.sam.loganapp.realm.Team;
 
 public class TeamActivity extends Activity {
     public Integer teamNum;
-    public int teamMountSpeed;
+    public Float teamWillingness;
     public Boolean teamCanMount;
-    public boolean teamRemoveMech;
-    public int[] ids = {R.id.radioButton, R.id.radioButton2, R.id.radioButton3};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +44,8 @@ public class TeamActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         teamNum = getIntent().getIntExtra("teamNum", 0);
-        teamMountSpeed = getIntent().getIntExtra("teamMountSpeed", 0);
+        teamWillingness = getIntent().getFloatExtra("teamWillingness", 0);
         teamCanMount = getIntent().getBooleanExtra("teamCanMount", false);
-        teamRemoveMech = getIntent().getBooleanExtra("teamRemoveMech", false);
 
         addListenerOnRatingBar();
         setupUIForTeam();
@@ -85,36 +76,25 @@ public class TeamActivity extends Activity {
 
 
     public void submitClicked(View view){
+        TextView willingnessValueTextView = (TextView)findViewById(R.id.willingTV);
         Switch mountabilityValueSwitch = (Switch)findViewById(R.id.canMount);
-        Switch removeMechValueSwitch = (Switch)findViewById(R.id.asdf);
-        RadioGroup radioGroup = (RadioGroup)findViewById(R.id.mountSpeed);
         TextView teamNumberTextView = (TextView)findViewById(R.id.teamNumber);
 
         Intent finishIntent = new Intent();
-        for (int i=0; i < ids.length; i++) {
-            if (((RadioButton)findViewById(ids[i])).isChecked()) {
-                finishIntent.putExtra("teamMountSpeed", i);
-            }
-        }
+        finishIntent.putExtra("teamMountingSpeed",(int)(2 * Float.parseFloat(willingnessValueTextView.getText().toString())));
         finishIntent.putExtra("teamCanMount", mountabilityValueSwitch.isChecked());
-        finishIntent.putExtra("teamRemoveMech", removeMechValueSwitch.isChecked());
         finishIntent.putExtra("teamNum", teamNumberTextView.getText());
         setResult(RESULT_OK, finishIntent);
         finish();
     }
 
     public void setupUIForTeam() {
+        RatingBar willingnessValueRatingBar = (RatingBar)findViewById(R.id.willingRB);
         Switch mountabilityValueSwitch = (Switch)findViewById(R.id.canMount);
-        Switch removeMechValueSwitch = (Switch)findViewById(R.id.asdf);
-        RadioGroup radioGroup = (RadioGroup)findViewById(R.id.mountSpeed);
         TextView teamNumberTextView = (TextView)findViewById(R.id.teamNumber);
 
-
-        if (teamMountSpeed > 0 && teamMountSpeed < ids.length) {
-            radioGroup.check(ids[teamMountSpeed]);
-        }
+        willingnessValueRatingBar.setRating(teamWillingness);
         mountabilityValueSwitch.setChecked(teamCanMount);
-        removeMechValueSwitch.setChecked(teamRemoveMech);
         teamNumberTextView.setText(teamNum.toString());
     }
 }
