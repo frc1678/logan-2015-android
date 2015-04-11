@@ -131,6 +131,9 @@ public class TeamListActivity extends ListActivity {
             uploadAllChangePackets();
 
             return true;
+        } else if (id == R.id.getDatabase) {
+            getDatabase();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -146,6 +149,10 @@ public class TeamListActivity extends ListActivity {
         }
     }
 
+    public void getDatabase() {
+        new RealmDownloadTask().execute(dbxFs, this);
+    }
+
     public void afterDbxLink() {
         try {
             dbxFs = DbxFileSystem.forAccount(DAM.getLinkedAccount());
@@ -155,8 +162,6 @@ public class TeamListActivity extends ListActivity {
             toast.show();
             e.printStackTrace();
         }
-
-        new RealmDownloadTask().execute(dbxFs, this);
     }
 
     @Override
@@ -164,6 +169,7 @@ public class TeamListActivity extends ListActivity {
         if (requestCode == Constants.REQUEST_LINK_TO_DBX) {
             if (resultCode == Activity.RESULT_OK) {
                 afterDbxLink();
+                new RealmDownloadTask().execute(dbxFs, this);
             } else {
                 DAM = DbxAccountManager.getInstance(getApplicationContext(), Constants.APP_KEY, Constants.APP_SECRET);
                 DAM.startLink(this, Constants.REQUEST_LINK_TO_DBX);

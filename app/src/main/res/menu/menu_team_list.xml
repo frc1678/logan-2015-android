@@ -8,4 +8,9 @@
         android:icon="@drawable/ic_cloud"
         app:showAsAction="always" />
 
+    <item android:id="@+id/getDatabase"
+        android:title="Get Database"
+        android:icon="@drawable/ic_cloud"
+        app:showAsAction="always" />
+
 </menu>
