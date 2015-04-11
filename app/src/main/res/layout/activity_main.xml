@@ -28,36 +28,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_above="@+id/willingRB"
                 android:textSize = "30sp"
-                android:text="Mounting Speed"
-                android:id="@+id/textView3" />
+                android:text="Mounting Speed" />
 
-            <RadioGroup
+            <RatingBar
+                android:id="@+id/willingRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/textView3"
-                android:id="@+id/mountSpeed">
+                android:clickable="false"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Before QF"
-                    android:id="@+id/radioButton"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Before SF"
-                    android:id="@+id/radioButton2"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Before Finals"
-                    android:id="@+id/radioButton3"/>
-            </RadioGroup>
-
+            <TextView
+                android:id="@+id/willingTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/willingRB"
+                android:text="0.0"/>
         </RelativeLayout>
 
 
@@ -99,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
                 android:layout_centerHorizontal="true"
-                android:text="Have to Remove Mech?"
+                android:text="Willing to Mount?"
                 android:id="@+id/textView2" />
 
 

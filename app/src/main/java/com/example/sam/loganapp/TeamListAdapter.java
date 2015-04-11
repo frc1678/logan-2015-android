@@ -82,7 +82,7 @@ public class TeamListAdapter extends BaseAdapter {
         teamText.setText(team.getNumber()+"");
 
 
-        if (team.getUploadedData().getMountingSpeed() != -1) {
+        if (team.getUploadedData().getEaseOfMounting() != -1) {
             teamText.setTextColor(Color.BLACK);
         } else {
             teamText.setTextColor(Color.RED);
@@ -94,8 +94,8 @@ public class TeamListAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, TeamActivity.class);
                 intent.putExtra("teamNum", team.getNumber());
                 intent.putExtra("teamCanMount", team.getUploadedData().isCanMountMechanism());
-                intent.putExtra("teamMountSpeed", team.getUploadedData().getMountingSpeed());
-                intent.putExtra("teamRemoveMech", team.getUploadedData().isMechRemove());
+                intent.putExtra("teamMountingSpeed", team.getUploadedData().getEaseOfMounting());
+                intent.putExtra("teamWillingness", team.getUploadedData().isWillingToMount());
                 ((Activity)context).startActivityForResult(intent, Constants.REQUEST_TEAM_ACTIVITY);
             }
         });

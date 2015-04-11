@@ -17,9 +17,8 @@ public class UploadedTeamData extends RealmObject {
     private String programmingLanguage;
     private String pitNotes;
     private boolean canMountMechanism;
-    private boolean rampable;
-    private int mountingSpeed;
-    private boolean mechRemove;
+    private boolean willingToMount;
+    private float easeOfMounting;
 
     public String getPitOrganization() {
         return pitOrganization;
@@ -53,27 +52,19 @@ public class UploadedTeamData extends RealmObject {
         this.canMountMechanism = canMountMechanism;
     }
 
-    public boolean isRampable() {
-        return rampable;
+    public boolean isWillingToMount() {
+        return willingToMount;
     }
 
-    public void setRampable(boolean rampable) {
-        this.rampable = rampable;
+    public void setWillingToMount(boolean willingToMount) {
+        this.willingToMount = willingToMount;
     }
 
-    public int getMountingSpeed() {
-        return mountingSpeed;
+    public float getEaseOfMounting() {
+        return easeOfMounting;
     }
 
-    public void setMountingSpeed(int mountingSpeed) {
-        this.mountingSpeed = mountingSpeed;
-    }
-
-    public boolean isMechRemove() {
-        return mechRemove;
-    }
-
-    public void setMechRemove(boolean mechRemove) {
-        this.mechRemove = mechRemove;
+    public void setEaseOfMounting(float easeOfMounting) {
+        this.easeOfMounting = easeOfMounting;
     }
 }

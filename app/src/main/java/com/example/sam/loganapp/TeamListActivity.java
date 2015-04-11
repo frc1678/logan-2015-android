@@ -171,17 +171,21 @@ public class TeamListActivity extends ListActivity {
         } else if (requestCode == Constants.REQUEST_TEAM_ACTIVITY) {
             Log.e("test", "Finished TeamActivity");
             if (resultCode == Activity.RESULT_OK) {
-                float willingness = data.getIntExtra("teamMountingSpeed", (int)0.0);
+                float mountSpeed = data.getFloatExtra("teamMountingSpeed", (int)0.0);
                 boolean canMount = data.getBooleanExtra("teamCanMount", false);
+                boolean willingness = data.getBooleanExtra("teamWillingness", false);
                 int teamNum = Integer.parseInt(data.getStringExtra("teamNum"));
                 //TODO: Update some of the names to reflect the lack of willingness, and to show the existence of mountingSpeed
-                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.WILLINGNESS_TO_MOUNT_TYPE, willingness);
+                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.MOUNT_SPEED_TYPE, mountSpeed);
                 Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.CAN_MOUNT_TYPE, canMount);
+                Utils.saveChangePacket(this, Utils.getCompetitionCode(realm), teamNum, Constants.WILLING_TO_MOUNT_TYPE, willingness);
 
                 realm.beginTransaction();
                 Team team = realm.where(Team.class).equalTo("number", teamNum).findFirst();
                 UploadedTeamData utd = team.getUploadedData();
                 utd.setCanMountMechanism(canMount);
+                utd.setEaseOfMounting(mountSpeed);
+                utd.setWillingToMount(willingness);
                 team.setUploadedData(utd);
 
                 realm.commitTransaction();
