@@ -30,7 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_above="@+id/willingRB"
                 android:textSize = "30sp"
-                android:text="Mounting Speed" />
+                android:text="Ease of Mounting" />
 
             <RatingBar
                 android:id="@+id/willingRB"
