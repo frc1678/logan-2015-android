@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.media.Rating;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,24 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxException;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-
-import com.example.sam.loganapp.realm.Team;
 
 public class TeamActivity extends Activity {
     public Integer teamNum;
@@ -85,7 +72,7 @@ public class TeamActivity extends Activity {
 
     public void submitClicked(View view){
         Switch mountabilityValueSwitch = (Switch)findViewById(R.id.canMount);
-        Switch removeMechValueSwitch = (Switch)findViewById(R.id.asdf);
+        Switch removeMechValueSwitch = (Switch)findViewById(R.id.removeMechValueSwitch);
         TextView willingnessValueTextView = (TextView)findViewById(R.id.willingTV);
         TextView teamNumberTextView = (TextView)findViewById(R.id.teamNumber);
 
@@ -103,7 +90,7 @@ public class TeamActivity extends Activity {
     public void setupUIForTeam() {
         Switch mountabilityValueSwitch = (Switch)findViewById(R.id.canMount);
         RatingBar mountSpeedRatingBar = (RatingBar)findViewById(R.id.willingRB);
-        Switch willingValueSwitch = (Switch)findViewById(R.id.asdf);
+        Switch willingValueSwitch = (Switch)findViewById(R.id.removeMechValueSwitch);
         TextView teamNumberTextView = (TextView)findViewById(R.id.teamNumber);
 
         mountabilityValueSwitch.setChecked(teamCanMount);

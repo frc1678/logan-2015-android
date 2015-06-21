@@ -95,7 +95,7 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/asdf"
+                android:id="@+id/removeMechValueSwitch"
                 android:textOff="No"
                 android:textOn="Yes"
                 android:layout_below="@+id/textView2"
