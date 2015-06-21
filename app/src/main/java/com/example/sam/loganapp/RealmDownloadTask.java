@@ -78,7 +78,6 @@ public class RealmDownloadTask extends AsyncTask {
             int b = 0;
             Log.e("test", "Time to start reading and writing!");
             while ((b = realmStream.read()) != -1) {
-// Log.e("test", "read! " + b);
                 outputStream.write(b);
             }
             for (String file : teamListActivity.fileList()) {
@@ -106,19 +105,6 @@ public class RealmDownloadTask extends AsyncTask {
         } catch (Exception e) {
             teamListActivity.realm = null;
         }
-    }
-
-    @Override
-    protected void onCancelled() {
-        super.onCancelled();
-        Log.e("test", "CANCELLED THREAD!");
-        try {
-            fis.close();
-            Log.e("test", "Closed.");
-        } catch (IOException ios) {
-            Log.e("test", "Could not close!");
-        }
-        realmFile.close();
     }
 }
 
