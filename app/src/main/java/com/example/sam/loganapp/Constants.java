@@ -12,8 +12,8 @@ public class Constants {
     public static final String CAN_MOUNT_TYPE = "canMountMechanism";
     public static final String WILLING_TO_MOUNT_TYPE = "willingToMount";
     public static final String MOUNT_SPEED_TYPE = "easeOfMounting";
-    public static final String APP_KEY = "fu1drprr1bha4zl";
-    public static final String APP_SECRET = "x8f4ehb2qyk30r4";
+    public static final String APP_KEY = "PLACE_APP_KEY_HERE";
+    public static final String APP_SECRET = "PLACE_APP_SECRET_HERE";
     public static final int REQUEST_LINK_TO_DBX = 0;
     public static final int REQUEST_TEAM_ACTIVITY = 1;
 }
